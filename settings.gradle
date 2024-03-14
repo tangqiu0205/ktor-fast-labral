@@ -1,0 +1,5 @@
+rootProject.name = "ktor_library"
+include 'ktor_cache', 'ktor_config', 'ktor_db', 'ktor_mq', 'ktor_discovery', 'ktor_openapi', 'ktor_mongo'
+include 'ktor_acl', 'testModule'
+include 'testModule2'
+

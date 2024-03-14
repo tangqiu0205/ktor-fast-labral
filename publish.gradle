@@ -1,0 +1,36 @@
+apply plugin: 'maven-publish'
+//打包
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+//上传至nexus
+publishing {
+    publications {
+        // publishProject 为自定义名称,可写多个发布任务
+        publishProject(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
+
+            from components.java // 发布 jar 包
+        }
+    }
+    repositories {
+        maven {
+            //指定要上传的 maven 私服仓库
+            if (project.version.endsWith('-SNAPSHOT')) {
+                url = "http://nexus.xxx.xx/repository/maven-snapshots/"
+            } else {
+                url = "http://nexus.xxx.xx/repository/maven-releases/"
+            }
+            allowInsecureProtocol = true
+            //认证用户和密码
+            credentials {
+                username 'xx'
+                password 'xx'
+            }
+        }
+    }
+}

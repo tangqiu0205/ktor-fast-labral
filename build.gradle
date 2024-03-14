@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url = "http://nexus.xx.xx/repository/maven-public/"
+            allowInsecureProtocol = true
+            //认证用户和密码
+            credentials {
+                username 'xxx'
+                password 'xxxx'
+            }
+        }
+        mavenCentral()
+    }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+}
